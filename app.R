@@ -56,7 +56,11 @@ ui <- fluidPage(
 server <- function(input, output) {
 
     output$storyPlot <- renderPlotly({
-      plot_ly (name="storyPlot", x=c(1,2,3), y=c(0, 0.5, 1), type="scatter", mode= 'lines+markers') %>% config(displayModeBar = FALSE)
+      
+      data <- data.frame(x=c(1,2,3,1,2,3), y=c(0, 0.5, 1,1,0.5,1), frame=c("step1","step1","step1","step2","step2","step2")) 
+      
+      plot_ly (data, x= ~x, y=~y , frame= ~frame, name="storyPlot", type="scatter", mode= 'lines+markers') %>% 
+        animation_slider(hide = TRUE) %>% animation_button(visible= FALSE) %>% config(displayModeBar = FALSE)
     })
     
     

@@ -10,13 +10,12 @@ var step = article.selectAll(".step");
 //flourishStoryUrl.hash = "" // Me quedo con la ruta de las story, sin la slide inicial.
 
 
-function randomize() {
+function animate(frameName) {
 
-    Plotly.animate('storyPlot', {
-      data: [{y: [Math.random(), Math.random(), Math.random()]}],
-      traces: [0],
-      layout: {}
-    }, {
+    frame = [frameName];
+
+    Plotly.animate('storyPlot', frame, 
+    {
       transition: {
         duration: 500,
         easing: 'cubic-in-out'
@@ -29,8 +28,6 @@ function randomize() {
   
   }
   
-
-
 
 
 // initialize the scrollama
@@ -64,11 +61,11 @@ function handleStepEnter(response) {
         return i === response.index;
     }); */
 
-    var stepSlide = response.element.attributes["data-step"].nodeValue
+    var plotFrame = response.element.attributes["data-step"].nodeValue
 
     // update graphic based on step
-    console.log("Response index:" + response.index + " - data-step: " + stepSlide)   
-    randomize();
+    console.log("Response index:" + response.index + " - data-step: " + plotFrame)   
+    animate(plotFrame);
 
 }
 
