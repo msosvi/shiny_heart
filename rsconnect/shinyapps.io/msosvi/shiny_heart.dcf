@@ -1,0 +1,11 @@
+name: shiny_heart
+title:
+username:
+account: msosvi
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6399549
+bundleId: 5961339
+url: https://msosvi.shinyapps.io/shiny_heart/
+when: 1653945723.88346
+lastSyncTime: 1653945723.88347
