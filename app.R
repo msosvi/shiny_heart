@@ -9,7 +9,7 @@ ui <- fluidPage(
     
     fluidRow(
       column(8, offset=2, 
-          tags$section(id="intro",
+          tags$section(id="intro", class="text-section",
               h1("¿Todas las personas tienen acceso a la electricidad?"),
               p(class="prose", "Los Objetivos de Desarrollo Sostenible de las Naciones Unidas son un plan para lograr un futuro mejor y más sostenible."),
               p(class="prose", "El Objetivo de Desarrollo Sostenible 7 es:"),
@@ -24,7 +24,14 @@ ui <- fluidPage(
                   )
           ),    
           
-          # Sidebar with a slider input for number of bins 
+          tags$section(id="risk", class="text-section",
+              p(class="prose", "Los Objetivos de Desarrollo Sostenible de las Naciones Unidas son un plan para lograr un futuro mejor y más sostenible."),
+              p(class="prose", "El Objetivo de Desarrollo Sostenible 7 es:"),
+              p(class="prose", strong(em("Garantizar el acceso a una energía asequible, segura, sostenible y moderna para todas las personas."))),
+              p(class="prose","¿Estamos cumpliendo el plan?")),
+          
+          
+          tags$section(id="calculator",
           sidebarLayout(
             sidebarPanel(
               sliderInput("bins",
@@ -38,7 +45,7 @@ ui <- fluidPage(
             mainPanel(
               plotOutput("distPlot")
             )
-          )
+          ))
     
     )),
     
