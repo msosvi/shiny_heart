@@ -4,6 +4,7 @@ var figure = storyScroll.select("figure");
 //var flourishStory = figure.select("#flourish-story")
 var article = storyScroll.select("article");
 var step = article.selectAll(".step");
+var calculator = d3.select("#calculator");
 
 
 //var flourishStoryUrl =  new URL(flourishStory.attr("src"))
@@ -24,11 +25,10 @@ function animate(frameName) {
       frame: {
         duration: 500
       }
-    })
+    });
   
   }
   
-
 
 // initialize the scrollama
 var scroller = scrollama();
@@ -40,13 +40,17 @@ function handleResize() {
     step.style("height", stepH + "px");
 
     // 2. update height of graphic element
-    var figureHeight = window.innerHeight * 0.8;
-    var figureMarginTop = (window.innerHeight - figureHeight) / 3;
+    var height = window.innerHeight * 0.8;
+    var marginTop = (window.innerHeight - height) / 3;
 
     figure
-        .style("height", figureHeight + "px")
-        .style("top", figureMarginTop + "px");
-
+        .style("height", height + "px")
+        .style("top", marginTop + "px");
+        
+    calculator
+        .style("height", height + "px")
+        .style("top", marginTop + "px");
+        
     // 3. tell scrollama to update new element dimensions
     scroller.resize();
 }
