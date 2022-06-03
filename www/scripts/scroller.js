@@ -41,7 +41,7 @@ function handleResize() {
 
     // 2. update height of graphic element
     var figureHeight = window.innerHeight * 0.8;
-    var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+    var figureMarginTop = (window.innerHeight - figureHeight) / 3;
 
     figure
         .style("height", figureHeight + "px")
@@ -91,6 +91,9 @@ function init() {
            // debug: true
         })
         .onStepEnter(handleStepEnter);
+        
+    // setup resize event
+	  window.addEventListener('resize', handleResize);  
 }
 
 // kick things off
