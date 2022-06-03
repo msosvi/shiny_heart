@@ -1,5 +1,3 @@
-
-
 library(shiny)
 library(plotly)
 
@@ -17,17 +15,14 @@ ui <- fluidPage(
               p(class="prose", "El Objetivo de Desarrollo Sostenible 7 es:"),
               p(class="prose", strong(em("Garantizar el acceso a una energía asequible, segura, sostenible y moderna para todas las personas."))),
               p(class="prose","¿Estamos cumpliendo el plan?")),
-              
-              
+        
           tags$section(id="story",
               div(id="story-scroll", 
-                  tags$figure(plotlyOutput(outputId = "storyPlot"),
+                  tags$figure(plotlyOutput(outputId = "storyPlot", height = "100%"),
                     tags$figcaption(em("Fuente de los datos:", strong("Tracking SDG7: The Energy Progress Report del año 2021")))),
                   tags$article(includeHTML("www/story_steps.html"))
                   )
           ),    
-          
-          
           
           # Sidebar with a slider input for number of bins 
           sidebarLayout(
