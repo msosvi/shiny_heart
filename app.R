@@ -1,5 +1,10 @@
 library(shiny)
+library(bslib)
 library(plotly)
+library(shinyWidgets)
+library(C50)
+
+model <- readRDS("model.rds")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -32,20 +37,47 @@ ui <- fluidPage(
           
           
           tags$section(id="calculator",
+          
           sidebarLayout(
-            sidebarPanel(
-              sliderInput("bins",
-                          "Number of bins:",
-                          min = 1,
-                          max = 50,
-                          value = 30)
+              sidebarPanel(
+              wellPanel(
+                sliderTextInput(inputId = "sex", label = "Sexo:", force_edges = TRUE, choices = c("Hombre", "Mujer")),
+                sliderTextInput(inputId = "age_category", "Edad:", grid = TRUE, force_edges = TRUE, 
+                                choices = c("18-24", "25-29", "30-34", "35-39","40-44","45-49", "50-54", "55-59", "60-64", 
+                                            "65-69", "70-74", "75-79","80 or older")),
+              ),
+              
+              wellPanel(
+                p("Estilo de Vida"),
+                materialSwitch(inputId = "smoking", label = "Smoking", status = "danger"),  
+                materialSwitch(inputId = "alcohol_drinking", label = "Alcohol drinking", status = "danger"),
+                materialSwitch(inputId = "physical_activity", label = "Physical Activity", status = "success"),
+              ),
+              
+              wellPanel(
+                sliderInput(inputId = "bmi", label="I.M.C.", min = 0, max = 100, value = 0),
+                sliderInput(inputId = "physical_health", label="Physical health", min = 0, max = 30, value = 0),
+                sliderInput(inputId = "mental_health", label="Mental health", min = 0, max = 30, value = 0),  
+                materialSwitch(inputId = "diff_walking", label = "Walking difficulties", status = "danger"),
+              ),
+              
+              wellPanel(
+                materialSwitch(inputId = "diabetic", label = "Diabetic", status = "danger"),  
+                materialSwitch(inputId = "stroke", label = "Stroke", status = "danger"),
+                materialSwitch(inputId = "asthma", label = "Asthma", status = "danger"),
+                materialSwitch(inputId = "kidney_disease", label = "Kidney disease", status = "danger"),
+                materialSwitch(inputId = "skin_cancer", label = "Skin cancer", status = "danger"),
+              )
             ),
             
-            # Show a plot of the generated distribution
-            mainPanel(
-              plotOutput("distPlot")
+           mainPanel(
+             wellPanel(
+              textOutput("predicted_risk"),
+              includeHTML("www/heart.svg")
+             )
             )
-          ))
+          )
+        )
     
     )),
     
@@ -55,6 +87,9 @@ ui <- fluidPage(
     
 
 )
+
+# BMI Smoking AlcoholDrinking Stroke PhysicalHealth MentalHealth DiffWalking Sex AgeCategory Race Diabetic PhysicalActivity SleepTime Asthma KidneyDisease SkinCancer
+
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
@@ -68,16 +103,47 @@ server <- function(input, output) {
     })
     
     
-    output$distPlot <- renderPlot({
-      # generate bins based on input$bins from ui.R
-      x    <- faithful[, 2]
-      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  
+    output$predicted_risk <- renderText({
+  
+      sex <- ifelse(input$sex == "Hombre", "Male", "Female")
       
-      # draw the histogram with the specified number of bins
-      hist(x, breaks = bins, col = 'darkgray', border = 'white')
+      stroke <- ifelse(input$stroke, "Yes", "No")
+      diabetic <- ifelse(input$diabetic, "Yes", "No")
+      
+      alcohol_drinking <- ifelse(input$alcohol_drinking, "Yes", "No")
+      smoking <- ifelse(input$smoking, "Yes", "No")
+      
+      diff_walking <- ifelse(input$diff_walking, "Yes", "No")
+      physical_activity <- ifelse(input$physical_activity, "Yes", "No")
+      asthma <- ifelse(input$asthma, "Yes", "No")
+      kidney_disease <- ifelse(input$kidney_disease, "Yes", "No")
+      skin_cancer <- ifelse(input$skin_cancer, "Yes", "No")
+    
+      age_category <- input$age_category
+    
+      new_data <- data.frame(BMI = input$bmi,
+                            Smoking = smoking,
+                            AlcoholDrinking = alcohol_drinking,
+                            Stroke = stroke,
+                            PhysicalHealth = input$physical_health,
+                            MentalHealth = input$mental_health, 
+                            DiffWalking = diff_walking,    
+                            Sex = sex,
+                            AgeCategory = age_category,
+                            Diabetic = diabetic,
+                            PhysicalActivity = physical_activity,
+                            SleepTime = 5,
+                            Asthma= asthma,
+                            KidneyDisease = kidney_disease,
+                            SkinCancer = skin_cancer)
+      
+      print(new_data)
+      prob_yes <- round(predict(model, new_data, type="prob")[2]*100,2)
+      print(prob_yes)
+      return(paste(format(prob_yes, decimal.mark=",", big.mark = "."), "%"))
+      
     })
-    
-    
     
 }
 
