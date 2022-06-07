@@ -2,9 +2,9 @@ body {
   background-color: #fafafa;
   color: #3f3f3f;
   font-size: 16px;
-  font-family: aktiv-grotesk, sans-serif;
+  font-family: Roboto, sans-serif;
   font-style: normal;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 h1 {
@@ -34,7 +34,7 @@ i {
   margin: 0 auto;
   padding: 4rem 1rem 1.5rem 1rem;
   max-width: 70rem;
-  font-weight: 200;
+  font-weight: 300;
   display: block;
 }
 
@@ -88,5 +88,29 @@ article .step p {
 .step.is-active p {
   background-color: goldenrod;
   color: #3b3b3b;
+}
+
+
+.calc-panel-title{
+  margin-top: -15px;
+  margin-left: -5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bolder;
+  
+}
+
+.calc-panel{
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.calc-display{
+  font-family: 'VT323', monospace;
+  font-size: 350px;
+  line-height: 1;
 }
 

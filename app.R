@@ -9,7 +9,9 @@ model <- readRDS("model.rds")
 # Define UI for application that draws a histogram
 ui <- fluidPage(
     tags$head(
-        tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
+        tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+        tags$style("@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');"),
+        tags$style("@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400');")
     ),
     
     fluidRow(
@@ -38,44 +40,60 @@ ui <- fluidPage(
           
           tags$section(id="calculator",
           
-          sidebarLayout(
-              sidebarPanel(
-              wellPanel(
-                sliderTextInput(inputId = "sex", label = "Sexo:", force_edges = TRUE, choices = c("Hombre", "Mujer")),
-                sliderTextInput(inputId = "age_category", "Edad:", grid = TRUE, force_edges = TRUE, 
-                                choices = c("18-24", "25-29", "30-34", "35-39","40-44","45-49", "50-54", "55-59", "60-64", 
-                                            "65-69", "70-74", "75-79","80 or older")),
-              ),
-              
-              wellPanel(
-                p("Estilo de Vida"),
-                materialSwitch(inputId = "smoking", label = "Smoking", status = "danger"),  
-                materialSwitch(inputId = "alcohol_drinking", label = "Alcohol drinking", status = "danger"),
-                materialSwitch(inputId = "physical_activity", label = "Physical Activity", status = "success"),
-              ),
-              
-              wellPanel(
-                sliderInput(inputId = "bmi", label="I.M.C.", min = 0, max = 100, value = 0),
-                sliderInput(inputId = "physical_health", label="Physical health", min = 0, max = 30, value = 0),
-                sliderInput(inputId = "mental_health", label="Mental health", min = 0, max = 30, value = 0),  
-                materialSwitch(inputId = "diff_walking", label = "Walking difficulties", status = "danger"),
-              ),
-              
-              wellPanel(
-                materialSwitch(inputId = "diabetic", label = "Diabetic", status = "danger"),  
-                materialSwitch(inputId = "stroke", label = "Stroke", status = "danger"),
-                materialSwitch(inputId = "asthma", label = "Asthma", status = "danger"),
-                materialSwitch(inputId = "kidney_disease", label = "Kidney disease", status = "danger"),
-                materialSwitch(inputId = "skin_cancer", label = "Skin cancer", status = "danger"),
+          verticalLayout(
+            wellPanel(class="calc-display",
+              fluidRow(
+                column(5, offset=2,
+                  span(style="vertical-align: middle", textOutput("predicted_risk"))),
+                column(2, offset=2, 
+                  span(style="vertical-align: middle", includeHTML("www/heart.svg"))
+                )
               )
             ),
             
-           mainPanel(
-             wellPanel(
-              textOutput("predicted_risk"),
-              includeHTML("www/heart.svg")
-             )
-            )
+            fluidRow(
+              column(3,
+                div(class = "calc-panel",
+                  p(class = "calc-panel-title", "Pérfil"),        
+                  sliderTextInput(inputId = "sex", label = "Sexo:", force_edges = TRUE, choices = c("Hombre", "Mujer")),
+                  sliderTextInput(inputId = "age_category", "Edad:", grid = TRUE, force_edges = TRUE, 
+                                choices = c("18-24", "25-29", "30-34", "35-39","40-44","45-49", "50-54", "55-59", "60-64", 
+                                            "65-69", "70-74", "75-79","80 or older")),
+                  )
+              ),
+              
+                column(3,
+                  div(class="calc-panel",
+                    p(class = "calc-panel-title", "Estilo de Vida"),        
+                    materialSwitch(inputId = "smoking", label = "Fumador", status = "danger"),  
+                    materialSwitch(inputId = "alcohol_drinking", label = "Consulmo de alcohol", status = "danger"),
+                    materialSwitch(inputId = "physical_activity", label = "Actividad física", status = "success"),
+                  )
+              ),
+              
+              
+                column(3,
+                  div(class="calc-panel",
+                    p(class = "calc-panel-title", "Estado de Salud"), 
+                    sliderInput(inputId = "bmi", label="I.M.C.", min = 0, max = 100, value = 0),
+                    sliderInput(inputId = "physical_health", label="Salud física", min = 0, max = 30, value = 0),
+                    sliderInput(inputId = "mental_health", label="Salud mental", min = 0, max = 30, value = 0),  
+                    materialSwitch(inputId = "diff_walking", label = "Dificultad para caminar", status = "danger"),
+                  )
+              ),
+              
+              
+                column(3,
+                  div(class="calc-panel",
+                    p(class = "calc-panel-title", "Enfermedades"),             
+                    materialSwitch(inputId = "diabetic", label = "Diabetes", status = "danger"),  
+                    materialSwitch(inputId = "stroke", label = "Ictus", status = "danger"),
+                    materialSwitch(inputId = "asthma", label = "Asma", status = "danger"),
+                    materialSwitch(inputId = "kidney_disease", label = "Enfermedad renal", status = "danger"),
+                    materialSwitch(inputId = "skin_cancer", label = "Cáncer de piel", status = "danger"),
+                  )
+                )
+              )
           )
         )
     
@@ -139,9 +157,9 @@ server <- function(input, output) {
                             SkinCancer = skin_cancer)
       
       print(new_data)
-      prob_yes <- round(predict(model, new_data, type="prob")[2]*100,2)
+      prob_yes <- round(predict(model, new_data, type="prob")[2]*100,1)
       print(prob_yes)
-      return(paste(format(prob_yes, decimal.mark=",", big.mark = "."), "%"))
+      return(paste0(format(prob_yes, decimal.mark=",", big.mark = "."), "%"))
       
     })
     
