@@ -1,14 +1,9 @@
 // using d3 for convenience
 var storyScroll = d3.select("#story-scroll");
 var figure = storyScroll.select("figure");
-//var flourishStory = figure.select("#flourish-story")
 var article = storyScroll.select("article");
 var step = article.selectAll(".step");
 var calculator = d3.select("#calculator");
-
-
-//var flourishStoryUrl =  new URL(flourishStory.attr("src"))
-//flourishStoryUrl.hash = "" // Me quedo con la ruta de las story, sin la slide inicial.
 
 
 function animate(frameName) {
@@ -98,6 +93,17 @@ function init() {
         
     // setup resize event
 	  window.addEventListener('resize', handleResize);  
+	  
+	  //Evento para mostrar graficamente lo roto que está el corazón
+	  $('#predicted_risk').on('shiny:value', function(event) {
+      console.log(event.value);
+      
+      var stroke_width = 12 * parseFloat(event.value.replace(/,/, '.')) /100;
+      console.log(stroke_width);
+      
+      d3.select("#broken_heart").style("stroke-width", stroke_width);
+    });
+	  
 }
 
 // kick things off
