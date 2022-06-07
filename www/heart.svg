@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   xml:space="preserve"
+   id="svg14"
+   sodipodi:docname="heart.svg"
+   inkscape:version="1.1.2 (08b2f3d93c, 2022-04-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+   id="namedview16"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   showgrid="false"
+   inkscape:zoom="3.8814172"
+   inkscape:cx="134.22932"
+   inkscape:cy="142.2161"
+   inkscape:window-width="1920"
+   inkscape:window-height="1016"
+   inkscape:window-x="0"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg14" />
+<defs
+   id="defs4">
+</defs>
+<g
+   transform="translate(128 128) scale(0.72 0.72)"
+   style=""
+   id="g12">
+	<g
+   style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+   transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)"
+   id="g10">
+	<path
+   d="M 7.486 13.502 c 9.982 -9.982 26.165 -9.982 36.147 0 L 45 14.869 l 0 0 c 6.895 22.882 6.259 47.092 0 72.294 L 26.927 69.089 c 0 0 0 0 0 0 l -19.44 -19.44 C -2.495 39.667 -2.495 23.484 7.486 13.502 z"
+   style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(214,73,62); fill-rule: nonzero; opacity: 1;"
+   transform=" matrix(1 0 0 1 0 0) "
+   stroke-linecap="round"
+   id="path6" />
+	<path
+   d="M 82.514 13.502 c -9.982 -9.982 -26.165 -9.982 -36.147 0 L 45 14.869 l 0 0 v 72.294 l 18.073 -18.073 c 0 0 0 0 0 0 l 19.44 -19.44 C 92.495 39.667 92.495 23.484 82.514 13.502 z"
+   style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(215,90,74); fill-rule: nonzero; opacity: 1;"
+   transform=" matrix(1 0 0 1 0 0) "
+   stroke-linecap="round"
+   id="path8" />
+</g>
+</g>
+<path
+   style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+   d="m 125.34361,38.168611 -14.59451,31.990542 47.01578,38.693247 -46.69659,16.7821 32.76725,33.87466 -26.22913,32.2803 30.83108,20.83295 L 128,246.09013"
+   id="broken_heart"
+   sodipodi:nodetypes="cccccccc" /></svg>
