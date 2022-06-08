@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'digital-7-mono';
+  src: url('digital-7.ttf');
+}
+
+
 body {
   background-color: #fafafa;
   color: #3f3f3f;
@@ -90,6 +96,12 @@ article .step p {
   color: #3b3b3b;
 }
 
+.calc-display{
+  font-family: 'digital-7-mono', monospace;
+  font-size: 350px;
+  line-height: 0.5;
+  background-color: white;
+}
 
 .calc-panel-title{
   margin-top: -15px;
@@ -97,7 +109,6 @@ article .step p {
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: bolder;
-  
 }
 
 .calc-panel{
@@ -108,9 +119,7 @@ article .step p {
   border-bottom: 1px solid #e3e3e3;
 }
 
-.calc-display{
-  font-family: 'VT323', monospace;
-  font-size: 350px;
-  line-height: 1;
+.calc-panel label {
+  font-weight: 300;
 }
 

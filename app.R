@@ -6,12 +6,10 @@ library(C50)
 
 model <- readRDS("model.rds")
 
-# Define UI for application that draws a histogram
 ui <- fluidPage(
     tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-        tags$style("@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');"),
-        tags$style("@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400');")
+        tags$style("@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400');"),
     ),
     
     fluidRow(
@@ -43,10 +41,10 @@ ui <- fluidPage(
           verticalLayout(
             wellPanel(class="calc-display",
               fluidRow(
-                column(5, offset=2,
-                  span(style="vertical-align: middle", textOutput("predicted_risk"))),
-                column(2, offset=2, 
-                  span(style="vertical-align: middle", includeHTML("www/heart.svg"))
+                column(5, offset=1,
+                  textOutput("predicted_risk")),
+                column(2, offset=3, 
+                  includeHTML("www/heart.svg")
                 )
               )
             ),
@@ -68,6 +66,7 @@ ui <- fluidPage(
                     materialSwitch(inputId = "smoking", label = "Fumador", status = "danger"),  
                     materialSwitch(inputId = "alcohol_drinking", label = "Consulmo de alcohol", status = "danger"),
                     materialSwitch(inputId = "physical_activity", label = "Actividad física", status = "success"),
+                    sliderInput(inputId = "sleep_time", label="Horas de sueño", min = 0, max = 24, value = 8),
                   )
               ),
               
@@ -151,7 +150,7 @@ server <- function(input, output) {
                             AgeCategory = age_category,
                             Diabetic = diabetic,
                             PhysicalActivity = physical_activity,
-                            SleepTime = 5,
+                            SleepTime = input$sleep_time,
                             Asthma= asthma,
                             KidneyDisease = kidney_disease,
                             SkinCancer = skin_cancer)
