@@ -86,7 +86,7 @@ ui <- fluidPage(
                 column(3,
                   div(class="calc-panel",
                     p(class = "calc-panel-title", "Estado de Salud"), 
-                    sliderInput(inputId = "bmi", label="I.M.C.", min = 0, max = 100, value = 0),
+                    sliderInput(inputId = "bmi", label="I.M.C.", min = 0, max = 100, value = 23),
                     sliderInput(inputId = "physical_health", label="Salud física", min = 0, max = 30, value = 0),
                     sliderInput(inputId = "mental_health", label="Salud mental", min = 0, max = 30, value = 0),  
                     materialSwitch(inputId = "diff_walking", label = "Dificultad para caminar", status = "danger"),
