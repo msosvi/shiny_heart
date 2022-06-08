@@ -53,8 +53,8 @@ ui <- fluidPage(
               column(3,
                 div(class = "calc-panel",
                   p(class = "calc-panel-title", "Pérfil"),        
-                  sliderTextInput(inputId = "sex", label = "Sexo:", force_edges = TRUE, choices = c("Hombre", "Mujer")),
-                  sliderTextInput(inputId = "age_category", "Edad:", grid = TRUE, force_edges = TRUE, 
+                  radioButtons(inputId = "sex", label = "Sexo", choices = c("Hombre", "Mujer"), selected="Mujer", inline=TRUE),
+                  sliderTextInput(inputId = "age_category", "Edad", grid = TRUE, force_edges = TRUE, 
                                 choices = c("18-24", "25-29", "30-34", "35-39","40-44","45-49", "50-54", "55-59", "60-64", 
                                             "65-69", "70-74", "75-79","80 or older")),
                   )
