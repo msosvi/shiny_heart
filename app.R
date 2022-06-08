@@ -6,6 +6,20 @@ library(C50)
 
 model <- readRDS("model.rds")
 
+
+# Función para recuperar la categoría a la que pertenece una edad.
+get_age_category <- local({
+  ages_categories = c("18-24", "25-29", "30-34", "35-39","40-44","45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80 or older")
+  ages_df <- data.frame(age=c(18:115))
+  ages_df$age_category = cut(ages_df$age, c(18, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 74, 79, 115), labels = ages_categories, include.lowest=TRUE, right = TRUE)  
+  
+  function(age){
+    return(ages_df[ages_df$age==age, "age_category"])
+  }
+})
+
+
+
 ui <- fluidPage(
     tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
@@ -54,9 +68,7 @@ ui <- fluidPage(
                 div(class = "calc-panel",
                   p(class = "calc-panel-title", "Pérfil"),        
                   radioButtons(inputId = "sex", label = "Sexo", choices = c("Hombre", "Mujer"), selected="Mujer", inline=TRUE),
-                  sliderTextInput(inputId = "age_category", "Edad", grid = TRUE, force_edges = TRUE, 
-                                choices = c("18-24", "25-29", "30-34", "35-39","40-44","45-49", "50-54", "55-59", "60-64", 
-                                            "65-69", "70-74", "75-79","80 or older")),
+                  sliderInput(inputId = "age", "Edad", min = 18, max = 115, value = 18 ),
                   )
               ),
               
@@ -137,7 +149,7 @@ server <- function(input, output) {
       kidney_disease <- ifelse(input$kidney_disease, "Yes", "No")
       skin_cancer <- ifelse(input$skin_cancer, "Yes", "No")
     
-      age_category <- input$age_category
+      age_category <- get_age_category(input$age)
     
       new_data <- data.frame(BMI = input$bmi,
                             Smoking = smoking,
