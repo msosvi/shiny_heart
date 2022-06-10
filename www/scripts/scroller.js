@@ -5,6 +5,8 @@ var article = storyScroll.select("article");
 var step = article.selectAll(".step");
 var calculator = d3.select("#calculator");
 
+var helpBlocks = calculator.selectAll(".help-block");
+
 
 function animate(frameName) {
 
@@ -60,10 +62,10 @@ function handleStepEnter(response) {
         return i === response.index;
     }); */
 
-    var plotFrame = response.element.attributes["data-step"].nodeValue
+    var plotFrame = response.element.attributes["data-step"].nodeValue;
 
     // update graphic based on step
-    console.log("Response index:" + response.index + " - data-step: " + plotFrame)   
+    console.log("Response index:" + response.index + " - data-step: " + plotFrame);
     animate(plotFrame);
 
 }
@@ -105,6 +107,15 @@ function init() {
     });
 	  
 }
+
+function showHideHelpText(){
+  if (helpBlocks.style("display")=="none"){
+     helpBlocks.style("display","block");
+  } else{
+     helpBlocks.style("display","none");
+  }
+}
+
 
 // kick things off
 init();

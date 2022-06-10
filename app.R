@@ -24,6 +24,7 @@ ui <- fluidPage(
     tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
         tags$style("@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400');"),
+        tags$link(href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css", rel="stylesheet", type="text/css")
     ),
     
     fluidRow(
@@ -63,6 +64,7 @@ ui <- fluidPage(
               )
             ),
             
+            fluidRow(column(12, a(id="help-icon", class="bi bi-question-circle pull-right", onclick="showHideHelpText();"))),
             fluidRow(
               column(3,
                 div(class = "calc-panel",
@@ -74,22 +76,40 @@ ui <- fluidPage(
               
                 column(3,
                   div(class="calc-panel",
-                    p(class = "calc-panel-title", "Estilo de Vida"),        
+                    p("Estilo de Vida", class = "calc-panel-title", onclick="showHideHelpText();"),        
                     materialSwitch(inputId = "smoking", label = "Fumador", status = "danger"),  
+                    helpText("¿Has fumado al menos 100 cigarrillos en su vida?"),
+                   
                     materialSwitch(inputId = "alcohol_drinking", label = "Consulmo de alcohol", status = "danger"),
+                    helpText("¿Bebes más de 14 bebidas a la semana si eres hombre o más de 7 si eres mujer?"),
+                    
                     materialSwitch(inputId = "physical_activity", label = "Actividad física", status = "success"),
+                    helpText("¿Has hecho ejercicio físico de forma habitual en los últimos 30 días."),
+                    
                     sliderInput(inputId = "sleep_time", label="Horas de sueño", min = 0, max = 24, value = 8),
+                    helpText("¿Cuántas horas duermes al día normalmente?")
+                   
                   )
               ),
               
               
                 column(3,
                   div(class="calc-panel",
-                    p(class = "calc-panel-title", "Estado de Salud"), 
+                    p(class = "calc-panel-title", "Estado de Salud", onclik="showHideHelpText();"), 
                     sliderInput(inputId = "bmi", label="I.M.C.", min = 0, max = 100, value = 23),
+                    helpText("Indice de masa corporal (IMC), indica si el peso es correcto en función de la estatura. ", 
+                             "Se calcula dividiendo los kilogramos de peso por el cuadrado de la estatura en metros."),
+                    
                     sliderInput(inputId = "physical_health", label="Salud física", min = 0, max = 30, value = 0),
+                    helpText("Pensando en tu salud física, que incluye enfermedades y lesiones físicas, ", 
+                             "¿durante cuántos días de los últimos 30 tu salud física no fue buena?"),
+                    
                     sliderInput(inputId = "mental_health", label="Salud mental", min = 0, max = 30, value = 0),  
+                    helpText("Pensando en tu salud mental, ", 
+                             "¿durante cuántos días de los últimos 30 tu salud mental no fue buena?"),
+                    
                     materialSwitch(inputId = "diff_walking", label = "Dificultad para caminar", status = "danger"),
+                    helpText("¿Tienes serias dificultades para caminar o subir escaleras?")
                   )
               ),
               
