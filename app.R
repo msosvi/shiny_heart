@@ -23,14 +23,14 @@ get_age_category <- local({
 ui <- fluidPage(
     tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-        tags$style("@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400');"),
+        tags$style("@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700');"),
         tags$link(href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css", rel="stylesheet", type="text/css")
     ),
     
     fluidRow(
       column(8, offset=2, 
           tags$section(id="intro", class="text-section",
-              h1("¿Todas las personas tienen acceso a la electricidad?"),
+              h1("¿Está tu corazón en riesgo?"),
               p(class="prose", "Los Objetivos de Desarrollo Sostenible de las Naciones Unidas son un plan para lograr un futuro mejor y más sostenible."),
               p(class="prose", "El Objetivo de Desarrollo Sostenible 7 es:"),
               p(class="prose", strong(em("Garantizar el acceso a una energía asequible, segura, sostenible y moderna para todas las personas."))),
@@ -39,8 +39,8 @@ ui <- fluidPage(
           tags$section(id="story",
               div(id="story-scroll", 
                   tags$figure(plotlyOutput(outputId = "storyPlot", height = "100%"),
-                    tags$figcaption(em("Fuente de los datos:", strong("Tracking SDG7: The Energy Progress Report del año 2021")))),
-                  tags$article(includeHTML("www/story_steps.html"))
+                      tags$figcaption(em("Fuente de los datos:", strong("Personal Key Indicators of Heart Disease Dataset. Kaggle.com")))), 
+                      tags$article(includeHTML("www/story_steps.html"))
                   )
           ),    
           
@@ -137,10 +137,6 @@ ui <- fluidPage(
 
 )
 
-# BMI Smoking AlcoholDrinking Stroke PhysicalHealth MentalHealth DiffWalking Sex AgeCategory Race Diabetic PhysicalActivity SleepTime Asthma KidneyDisease SkinCancer
-
-
-# Define server logic required to draw a histogram
 server <- function(input, output) {
 
     output$storyPlot <- renderPlotly({
